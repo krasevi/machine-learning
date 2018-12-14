@@ -34,6 +34,8 @@ from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 
+from fpdf import FPDF
+
 # datasets have been taken from:
 
 # url="https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
@@ -72,7 +74,7 @@ while True:
 			\nplease enter a valid [.csv] file such as 'iris.csv'!\n""")
 
 # define output path
-output_path="ouput/"+filename.split('.csv')[0]+".pdf"
+output_path="output/"+filename.split('.csv')[0]+".pdf"
 
 
 # Enter evaluation fraction of the dataset
@@ -206,7 +208,43 @@ plt.savefig("output/confusion_matrix.png")
 # 6. Print All the results into a PDF document
 
 # print PDF
-#pdf = FPDF(orientation='P', unit='mm', format='A4')
-#def plotGraph (X,Y):
-#	plt.figure(figure_1)
-#	return figure_1
+
+# define texts for the PDF
+text_1 = """Grop project#62. Machine learning with Python"""
+text_2 = "Assignment overview"
+text_3 = """Data classification with supervised learning based on a predefined
+data set. Case of Iris flowers Dataset"""
+text_4 = """Tasks:"""
+text_5 = """Project development discription"""
+text_6 = """Data classification with supervised learning based on a predefined
+ data set. Case of Iris flowers Dataset"""
+
+# add texts and plots to the pdf
+
+pdf = FPDF(format='A4')
+pdf.add_page()
+pdf.set_font("Times", "B", size=14)
+pdf.cell(0, 10, txt=text_1, ln=1, align="C")
+pdf.set_font("Times","I", size=12)
+pdf.cell(0, 7, txt=text_2, ln=2)
+pdf.set_font("Times", size=12)
+pdf.cell(0, 7, txt=text_3, ln=3)
+pdf.set_font("Times","I", size=12)
+pdf.cell(200, 7, txt=text_4, ln=3)
+pdf.set_font("Times", size=12)
+pdf.set_xy(70.00, 47.00)
+pdf.cell(0,0,'1) Find relevant dataset',(pdf.get_x(), pdf.get_y()))
+pdf.set_xy(70.00, 54.00)
+pdf.cell(0,0,'2) Test Models',(pdf.get_x(), pdf.get_y()))
+pdf.set_xy(70.00, 61.00)
+pdf.cell(0,0,'3) Define limitations',(pdf.get_x(), pdf.get_y()), ln=1)
+pdf.set_font("Times","I", size=12)
+pdf.cell(0, 10, txt=text_5, ln=1)
+pdf.set_font("Times", size=12)
+pdf.cell(0, 7, txt=text_6, ln=1)
+
+
+pdf.image("output/boxplot.png", w=100, h=100)
+
+# save pdf to output folder
+pdf.output(output_path)
