@@ -158,6 +158,7 @@ models.append(('SVM', SVC()))
 results = []
 model_names = []
 predictions = []
+messages = []
 for name, model in models:
 	kfold = model_selection.KFold(n_splits=10)
 	cv_results = model_selection.cross_val_score(model, X_train, Y_train, cv=kfold, scoring=scoring)
@@ -166,6 +167,7 @@ for name, model in models:
 	model.fit(X_train, Y_train)
 	predictions.append(model.predict(X_validation))
 	msg = "%s: %f (%f)" % (name, cv_results.mean(), cv_results.std())
+	messages.append(msg)
 	print(msg)
 
 # Compare Algorithms
@@ -210,73 +212,124 @@ plt.savefig("output/confusion_matrix.png")
 # print PDF
 
 # define texts for the PDF
-text_1 = "Grop project#62. Machine learning with Python."
-text_2 = "Assignment overview"
-text_3 = "Data classification with supervised learning based on a predefined data set uncluding a comparison of different algorithms. Case of 3 Datasets: Iris flowers, Ecoli and "
-text_4 = "Assignment tasks:"
-text_5 = "Project development discription"
-text_6 = "Before starting, all necessary libraries such as SciPy, Sklearn and FPDF were installed. The next step was retrieving datasets. We chose several datasets from The UCI Machine Learning Repository: Iris flowers, Ecoli and , which have several charasteristics in common. For example, three of them are multivariate and are based on real attributes. Similar attributes makes these datasets applicable for conducting classification tasks. In order to have clean data, prepared for the research, we restructured it in accordance with the following order: first line is name vectors while first row is class vectors. All data used is numerical."
-text_7 = "After loading the dataset and defining input and output paths, we moved to getting the initial feeling of the datasets. That means creation of several discriptive statistical graphs."
-text_8 = "First is a boxplot, based on the minimum, first quartile, median, third quartile, and maximum of every algorithm. As it can be seen, "
-text_9 = "The second and third explanatory graphs are scatter plot matrices, drawn with matplotlib and seaborn.  "
-text_10 = "After some preparations such as random data splitting using the sklearn function train_test_split, spot checking of the algorithms and appending them into a list, we evaluated the different Supervised Learning Classification Methods in turn. The comparison of the results can be seen on the picture below:"
-text_11 = "The final stage of our project was drawing a confusion matrix for all the different algorithms."
-text_12 = "Results showed, that..."
+title_1 = "Supervised Learning Classification of "+filename+" dataset"
+subtitle_1 = "Content:"
+text_1 = "The following report shows a comparison of different supervised learning algorithms that classify the data of the " +filename+" dataset."
+bullet_1 = " 1) Get an overview of dataset"
+bullet_2 = " 2) Compare Classification algorithms"
+#bullet_3 = " 3) Evaluate different Algorithms"
+#bullet_4 = " 4) Show results"
+
+subtitle_2 = "1) Get an overview of the dataset:"
+text_2 = "The boxplot diagram shows an overview of the different features within the dataset and its attributes."
+text_3 = "On the X-Axis the different features of the "+filename+" dataset are represented."
+text_4 = "The Y-Axis shows how the attributes of the different attributes of the features."
+text_5 = "The boxplot is based on the minimum, first quartile, median, third quartile, and maximum."
+text_6 = "The second graph is a scatterplot that shows how the feature attributes are distributed for the different classes. Classification algorithms should show better results if clusters can be recognized within the scatterplot."
+
+subtitle_3 = "2) Compare classification algorithms"
+text_7 = "Now that we got a feeling of how the dataset is distributed, a random split for training and evaluation data has been conducted. The following boxplot diagram shows the comparison of the different supervised learning algorithms:"
+text_8 = "Finally, the confusion matrix shows a comparison of the predictions by the algorithms with the test data (Y-Axis) and the validation through the actual class labels (X-Axis). In the optimum all data is distributed on a diagonal line from the top left corner to the bottom right corner. This means that the predictions match the validation."
+text_9 = "The accuracies of the different algorithms are as follows:"
+
+bullet_5 = messages[0]
+bullet_6 = messages[1]
+bullet_7 = messages[2]
+bullet_8 = messages[3]
+bullet_9 = messages[4]
+bullet_10 = messages[5]
 
 # add texts and plots to the pdf
-
-from fpdf import FPDF
 pdf = FPDF(format='A4')
 pdf.set_margins(20,20,10)
 pdf.add_page()
+
+
+# document title
 pdf.set_font("Times", "B", size=14)
-pdf.cell(0, 10, txt=text_1, align="C", ln=1)
+pdf.cell(0, 10, txt=title_1, align="C", ln=1)
+
+# document content
 pdf.set_font("Times","I", size=12)
-pdf.cell(0, 7, txt=text_2, ln=2)
+pdf.cell(0, 7, txt=subtitle_1, ln=2)
+
+# bullet points of content
 pdf.set_font("Times", size=12)
+pdf.set_xy(30.00, 40.00)
+pdf.cell(0,0,bullet_1,(pdf.get_x(), pdf.get_y()), ln=1)
+pdf.set_xy(30.00, 47.00)
+pdf.cell(0,0,bullet_2,(pdf.get_x(), pdf.get_y()), ln=1)
+# pdf.set_xy(30.00, 52.00)
+# pdf.cell(0,0,bullet_3,(pdf.get_x(), pdf.get_y()), ln=1)
+# pdf.set_xy(30.00, 59.00)
+# pdf.cell(0,0,bullet_4,(pdf.get_x(), pdf.get_y()), ln=1)
+
+# introduction section
+pdf.set_font("Times", size=12)
+pdf.multi_cell(0, 7, txt=text_1)
+
+
+# boxplot description
+pdf.set_font("Times","I", size=12)
+pdf.cell(0, 7, txt=subtitle_2, ln=2)
+
+pdf.set_font("Times", size=12)
+pdf.cell(0, 10, txt=text_2, ln=1)
 pdf.multi_cell(0, 7, txt=text_3)
-pdf.set_font("Times","I", size=12)
-pdf.cell(0, 7, txt=text_4)
-pdf.set_font("Times", size=12)
-pdf.set_xy(70.00, 57.00)
-pdf.cell(0,0,'1) Prepare for coding by installing libraries and finding data',(pdf.get_x(), pdf.get_y()))
-pdf.set_xy(70.00, 64.00)
-pdf.cell(0,0,'2) Test algorithms, visualise results and define the best algorithm',(pdf.get_x(), pdf.get_y()))
-pdf.set_xy(70.00, 71.00)
-pdf.cell(0,0,'3) Test algorithms, visualise results and define the best algorithm',(pdf.get_x(), pdf.get_y()), ln=1)
-pdf.set_xy(70.00, 78.00)
-pdf.cell(0,0,'4) Sum up the results and make suggestions for further work',(pdf.get_x(), pdf.get_y()), ln=1)
-pdf.set_font("Times","I", size=12)
-pdf.cell(0, 10, txt=text_5, ln=1)
-pdf.set_font("Times", size=12)
-pdf.multi_cell(0, 7, txt=text_6)
-pdf.multi_cell(0, 7, txt=text_7)
+pdf.multi_cell(0, 7, txt=text_4)
+pdf.multi_cell(0, 7, txt=text_5)
 
-pdf.set_font("Times", size=12)
-pdf.multi_cell(0, 7, txt=text_8)
+#boxplot diagram
 #pdf.rect(60, 170, 100, 60)
-pdf.image("output/boxplot.png", 60, 170, 100, 60)
+pdf.image("output/boxplot.png", 30, 120, 150, 150)
 
+# new page
 pdf.add_page()
 pdf.set_margins(20,20,10)
-pdf.set_font("Times", size=12)
-pdf.multi_cell(0, 7, txt=text_9)
-#pdf.rect(20, 30, 80, 60)
-pdf.image("output/scatterplot.png", 20, 30, 80, 60)
-#pdf.rect(110, 30, 80, 60)
-#pdf.image("output/scatterplot1.png", 110, 30, 80, 60)
-pdf.set_xy(20.00, 100.00)
-pdf.multi_cell(0,7,text_10,(pdf.get_x(), pdf.get_y()))
-pdf.image("output/scatterplot.png", 20, 30, 80, 60)
-#pdf.rect(60, 125, 100, 60)
-pdf.image("output/comparison.png", 60, 130, 100, 60)
 
+
+# scatterplot and description
+#pdf.rect(20, 30, 80, 60)
+pdf.set_font("Times", size=12)
+pdf.multi_cell(0, 7, txt=text_6)
+pdf.image("output/scatterplot.png", 20, 70, 160, 160)
+
+# new page
+pdf.add_page()
+pdf.set_margins(20,20,10)
+
+#comparison of the different algorithms
+#pdf.rect(60, 125, 100, 60)
+pdf.set_font("Times","I", size=12)
+pdf.cell(0, 7, txt=subtitle_3, ln=2)
+
+pdf.set_font("Times", size=12)
+pdf.set_xy(20.00, 30.00)
+pdf.multi_cell(0,7,text_7,(pdf.get_x(), pdf.get_y()))
+pdf.image("output/comparison.png", 60, 55, 100, 60)
+
+# list of the accuracies of the different algorithms
+pdf.set_xy(20.00, 120.00)
+pdf.multi_cell(0,7,text_9,(pdf.get_x(), pdf.get_y()))
+pdf.set_xy(70.00, 134.00)
+pdf.cell(0,0,bullet_5,(pdf.get_x(), pdf.get_y()))
+pdf.set_xy(70.00, 141.00)
+pdf.cell(0,0,bullet_6,(pdf.get_x(), pdf.get_y()))
+pdf.set_xy(70.00, 148.00)
+pdf.cell(0,0,bullet_7,(pdf.get_x(), pdf.get_y()), ln=1)
+pdf.set_xy(70.00, 155.00)
+pdf.cell(0,0,bullet_8,(pdf.get_x(), pdf.get_y()), ln=1)
+pdf.set_xy(70.00, 162.00)
+pdf.cell(0,0,bullet_9,(pdf.get_x(), pdf.get_y()), ln=1)
+pdf.set_xy(70.00, 170.00)
+pdf.cell(0,0,bullet_10,(pdf.get_x(), pdf.get_y()), ln=1)
+
+#draw confusion matrix
 pdf.set_xy(20.00, 190.00)
-pdf.multi_cell(0,7,text_11,(pdf.get_x(), pdf.get_y()))
+pdf.multi_cell(0,7,text_8,(pdf.get_x(), pdf.get_y()))
 #pdf.rect(60, 200, 100, 60)
-pdf.image("output/confusion_matrix.png", 60, 210, 100, 60)
-pdf.set_xy(20.00, 265.00)
-pdf.multi_cell(0,7,text_12,(pdf.get_x(), pdf.get_y()))
+pdf.image("output/confusion_matrix.png", 40, 220, 120, 72)
+
 
 # save pdf to output folder
 pdf.output(output_path)
