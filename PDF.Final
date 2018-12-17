@@ -63,11 +63,11 @@ pdf.image("output/comparison.png", 60, 130, 100, 60)
 pdf.set_xy(20.00, 190.00)
 pdf.multi_cell(0,7,text_11,(pdf.get_x(), pdf.get_y()))
 #pdf.rect(60, 200, 100, 60)
-pdf.image("output/confusion_matrix.png", 60, 2100, 100, 60)
+pdf.image("output/confusion_matrix.png", 60, 210, 100, 60)
 pdf.set_xy(20.00, 265.00)
 pdf.multi_cell(0,7,text_12,(pdf.get_x(), pdf.get_y()))
 
 # save pdf to output folder
-pdf.output("Project.pdf")
+pdf.output(output_path)
 
 
