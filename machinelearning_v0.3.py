@@ -80,7 +80,7 @@ output_path="output/"+filename.split('.csv')[0]+".pdf"
 # Enter evaluation fraction of the dataset
 validationSize = float(input("Enter the evaluation fraction of the data as floating point number\n> "))
 
-dataset = pd.read_csv(input_path, delimiter=';')
+dataset = pd.read_csv(input_path, delimiter=';',encoding='cp1252')
 names = list(dataset.columns)
 numVars = len(names)-1
 
