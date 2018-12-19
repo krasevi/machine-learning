@@ -4,16 +4,16 @@
 # print PDF
 from fpdf import FPDF
 # define texts for the PDF
-title_1 = "Supervised Learning Classification of dataset"
+title_1 = "Supervised Learning Classification of"+ filename + dataset"
 subtitle_1 = "Content:"
-text_1 = "The following report shows a comparison of different supervised learning algorithms that classify the data of the dataset."
+text_1 = "The following report shows a comparison of different supervised learning algorithms that classify the data of the" + filename + dataset."
 bullet_1 = " 1) Get an overview of dataset"
 bullet_2 = " 2) Compare Classification algorithms"
 #bullet_3 = " 3) Evaluate different Algorithms"
 #bullet_4 = " 4) Show results"
 
 subtitle_2 = "1) Get an overview of the dataset:"
-text_2 = "The boxplot diagram shows an overview of the different features within the dataset and its attributes. On the X-Axis the different features of the dataset are represented. The Y-Axis shows how the attributes of the different attributes of the features. The boxplot is based on the minimum, first quartile, median, third quartile, and maximum."
+text_2 = "The boxplot diagram shows an overview of the different features within the dataset and its attributes. On the X-Axis the different features of the"+filename+"dataset are represented. The Y-Axis shows how the attributes of the different attributes of the features. The boxplot is based on the minimum, first quartile, median, third quartile, and maximum."
 text_3 = "The second graph is a scatterplot that shows how the feature attributes are distributed for the different classes. Classification algorithms should show better results if clusters can be recognized within the scatterplot."
 
 subtitle_3 = "2) Compare classification algorithms"
