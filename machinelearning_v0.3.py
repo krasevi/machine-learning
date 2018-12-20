@@ -112,11 +112,13 @@ print(dataset.groupby('class').size())
 # Show boxplot of dataset
 # prepare plot
 
-#make graph ticklables readable through rotation
-if numVars > 10:
+#make graph ticklables readable through rotation and fontsize
+if numVars > 5:
 	rotate=30
-elif numVars > 15:
+	fsize=9
+elif numVars > 10:
 	rotate=90
+	fsize=7
 else:
 	rotate = 0
 
@@ -124,18 +126,9 @@ fig = plt.figure()
 ax = fig.add_subplot(111)
 ax.grid(linestyle='dotted')
 ax = sns.boxplot(data=dataset, palette="Set2")
-plt.xticks(rotation=rotate)
+plt.xticks(fontsize=fsize, rotation=rotate)
+plt.tight_layout()
 plt.savefig("output/boxplot.png")
-
-# Show histograms of dataset (not working)
-# fig = plt.figure()
-# ax = fig.add_subplot(111)
-# ax.grid(linestyle='dotted')
-# ax = sns.distplot(a=data)
-
-# Show scatter plot matrix with matplotlib (disabled)
-# scatter_matrix(dataset)
-# plt.savefig("output/scatterplot1.png")
 
 # Show Scatter plot matrix with seaborn
 # plt.figure(figsize=(10, 10))
@@ -333,7 +326,7 @@ pdf.cell(0,0,bullet_10,(pdf.get_x(), pdf.get_y()), ln=1)
 # draw confusion matrix
 
 # only draw confusion matrix if not too much variables
-if numVars > 15:
+if numVars > 9:
 	# save pdf to output folder
 	pdf.output(output_path)
 else:
