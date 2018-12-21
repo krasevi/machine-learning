@@ -115,12 +115,13 @@ print(dataset.groupby('class').size())
 #make graph ticklables readable through rotation and fontsize
 if numVars > 5:
 	rotate=30
-	fsize=9
+	fsize=8
 elif numVars > 10:
 	rotate=90
-	fsize=7
+	fsize=6
 else:
 	rotate = 0
+	fsize = 9
 
 fig = plt.figure()
 ax = fig.add_subplot(111)
