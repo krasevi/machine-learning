@@ -1,4 +1,4 @@
-Grop project#62. Machine learning with Python.
+Group project#62. Machine learning with Python.
 
 **About**
 This is a student project of the university of St. Gallen of the course Advanced Programming.
@@ -56,6 +56,6 @@ leaf: http://archive.ics.uci.edu/ml/datasets/Leaf
 iris: http://archive.ics.uci.edu/ml/datasets/Iris
 ecoli: http://archive.ics.uci.edu/ml/datasets/Ecoli
 yeast: http://archive.ics.uci.edu/ml/datasets/Yeast
-glass: http://archive.ics.uci.edu/ml/datasets/Glass+Identification s
+glass: http://archive.ics.uci.edu/ml/datasets/Glass+Identification
 
 
