@@ -1,6 +1,6 @@
 Grop project#62. Machine learning with Python.
 
-Data classification with supervised learning based on a predefined data set uncluding a comparison of different algorithms. Case of 3 Datasets: Iris flowers, Ecoli and Leaves.
+Data classification with supervised learning based on a predefined data set uncluding a comparison of different algorithms. Case of 4 Datasets: Iris flowers, Ecoli, Yeast and Leaves.
 
 Assignment tasks:
 
