@@ -38,9 +38,11 @@ from fpdf import FPDF
 
 # datasets have been taken from:
 
-# url="https://raw.githubusercontent.com/jbrownlee/Datasets/master/iris.csv"
-# url="http://archive.ics.uci.edu/ml/machine-learning-databases/ecoli/ecoli.data"
-# add further urls***
+# leaf: http://archive.ics.uci.edu/ml/datasets/Leaf
+# iris: http://archive.ics.uci.edu/ml/datasets/Iris
+# ecoli: http://archive.ics.uci.edu/ml/datasets/Ecoli
+# yeast: http://archive.ics.uci.edu/ml/datasets/Yeast
+# glass: http://archive.ics.uci.edu/ml/datasets/Glass+Identification s
 
 # in order to have clean data and to make them interchangable, data have
 # been re-ordered with the stucture:
